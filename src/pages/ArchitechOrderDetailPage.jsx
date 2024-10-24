@@ -16,27 +16,28 @@ const sampleImages = [
   "/img/sample3.jpg",
 ];
 
-export function KarigarorderDetail() {
+export function ArchitechorderDetail() {
   const { id, orderId } = useParams();
-  const [workerOrder, setWorkerOrder] = useState([]);
+  const [Architechorder, setArchitechOrder] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  console.log(id)
   // Fetch labor details
-  async function getLabor() {
+  async function getArchitech() {
     const requestOptions = {
       method: "GET",
     };
     try {
       const response = await fetch(
-        `https://karigar-server-new.onrender.com/api/v1/labor/getLaborById/${id}`,
+        `https://karigar-server-new.onrender.com/api/v1/architect/getArchitect/${id}`,
         requestOptions
       );
       const result = await response.json();
+      console.log(result)
       if (result.success === true) {
-        const workerOrder = result.labor.order.filter((ele) => {
+        const ArchitechOrder = result.architect.orders.filter((ele) => {
           return ele._id === orderId;
         });
-        setWorkerOrder(workerOrder[0]);
+        setArchitechOrder(ArchitechOrder[0]);
       }
     } catch (error) {
       console.error(error);
@@ -44,7 +45,7 @@ export function KarigarorderDetail() {
   }
 
   useEffect(() => {
-    getLabor();
+    getArchitech();
   }, []);
 
   // Handle next image
@@ -60,26 +61,29 @@ export function KarigarorderDetail() {
       prevIndex === 0 ? sampleImages.length - 1 : prevIndex - 1
     );
   };
-
+   console.log(Architechorder)
   return (
+
     <>
      <CardHeader variant="gradient" color="gray" className="mt-8 p-6">
           <Typography variant="h6" color="white">
-            Karigar Order Details Page
+            Architech Order Details Page
           </Typography>
         </CardHeader>
       {/* Carousel Section */}
       <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl">
-        {/* Images */}
-        <div
-          className="h-full w-full bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${workerOrder?.workDetails?.images[currentImageIndex]})`,
-          }}
-        ></div>
+     
+     {Architechorder?.images && Architechorder?.images.length > 0 && (
+                    <div
+                        className="h-full w-full bg-cover bg-center"
+                        style={{
+                            backgroundImage: `url(${Architechorder?.images[currentImageIndex] || ''})`,
+                        }}
+                    ></div>
+                )}
+        
         <div className="absolute inset-0 h-full w-full bg-gray-900/50" />
 
-        {/* Previous Button */}
         <button
           className="absolute top-1/2 left-5 text-white bg-gray-700 px-2 py-1 rounded-full"
           onClick={prevImage}
@@ -87,7 +91,7 @@ export function KarigarorderDetail() {
           {"<"}
         </button>
 
-        {/* Next Button */}
+     
         <button
           className="absolute top-1/2 right-5 text-white bg-gray-700 px-2 py-1 rounded-full"
           onClick={nextImage}
@@ -103,12 +107,11 @@ export function KarigarorderDetail() {
             <ProfileInfoCard
               title="Order Detail"
               details={{
-                "Work Title": `${workerOrder?.workDetails?.workTitle}`,
-                "Work Description": `${workerOrder?.workDetails?.workDescription}`,
-                "Date & Slot": `${workerOrder?.dateAndTime?.bookingType} / ${workerOrder?.dateAndTime?.date.slice(0,10)} / ${workerOrder?.dateAndTime?.slots}`,
-                "Order ID": `${workerOrder?._id}`,
-                Location: `${workerOrder?.address || null}`,
-                "Order Status": `${workerOrder?.status}`,
+                "order id": `${Architechorder?._id}`,
+                "Concern": `${Architechorder?.concern}`,
+                "Concern Descreption": `${Architechorder?.description}`,
+                "Location": ` ${Architechorder?.userId?.address[0]?.addressLine} ${Architechorder?.userId?.address[0]?.city} ${Architechorder?.userId?.address[0]?.state} ${Architechorder?.userId?.address[0]?.pincode}`,
+                "Order Status": `${Architechorder?.status}`,
               }}
             />
 
@@ -116,9 +119,9 @@ export function KarigarorderDetail() {
             <ProfileInfoCard
               title="Customer Detail"
               details={{
-                Name: `${workerOrder?.customerId?.name}`,
-                Email: `${workerOrder?.customerId?.email}`,
-                "Mobile Number": `${workerOrder?.customerId?.mobile_number}`,
+                Name: `${Architechorder?.userId?.name}`,
+                Email: `${Architechorder?.userId?.email}`,
+                "Mobile Number": `${Architechorder?.userId?.mobile_number}`,
               }}
             />
 
@@ -126,13 +129,13 @@ export function KarigarorderDetail() {
             <ProfileInfoCard
               title="Payment Detail"
               details={{
-                "Payment ID": `${workerOrder?.payment?.paymentId}`,
-                "Payment By": `${workerOrder?.customerId?.name}`,
-                "Payment Price": `${workerOrder?.payment?.paymentDetails?.price} Rs`,
-                "Payment Type": `${workerOrder?.payment?.paymentType}`,
-                "Payment Mode": `${workerOrder?.payment?.paymentMode}`,
-                "Payment Status": `${workerOrder?.payment?.paymentStatus}`,
-                "Payment Created": `${workerOrder?.payment?.createdAt.slice(0, 10)}`,
+                "Payment ID": `${Architechorder?.payment?.paymentId}`,
+                "Payment By": `${Architechorder?.payment?.paymentDetails?.payee?.name}`,
+                "Payment Price": `${Architechorder?.payment?.paymentDetails?.price} Rs`,
+                "Payment Type": `${Architechorder?.payment?.paymentType}`,
+                "Payment Mode": `${Architechorder?.payment?.paymentMode}`,
+                "Payment Status": `${Architechorder?.payment?.paymentStatus}`,
+                "Payment Created": `${Architechorder?.payment?.createdAt.slice(0, 10)}`,
               }}
             />
           </div>
@@ -142,4 +145,4 @@ export function KarigarorderDetail() {
   );
 }
 
-export default KarigarorderDetail;
+export default ArchitechorderDetail;

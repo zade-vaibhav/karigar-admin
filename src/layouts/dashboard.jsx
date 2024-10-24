@@ -12,6 +12,12 @@ import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 import KarigarDetail from "@/pages/dashboard/karigarDetail";
 import KarigarorderDetail from "@/pages/dashboard/KarigarorderDetail";
 import MerchentDetail from "@/pages/dashboard/MerchentDetails";
+import MerchentOrderDetail from "@/pages/dashboard/MerchentOrderDetail";
+import MerchentProductDetail from "@/pages/dashboard/MerchentProductDetailsPage";
+import KarigarPaymentorderDetail from "@/pages/dashboard/Payments/KarigarPaymentDetailPage";
+import MerchentPaymentOrderDetail from "@/pages/dashboard/Payments/MerchentPaymentOrderDetail";
+import ArchitechDetail from "@/pages/ArchitechDetail";
+import ArchitechorderDetail from "@/pages/ArchitechOrderDetailPage";
 
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -48,7 +54,12 @@ export function Dashboard() {
           <Route exact path={"/Karigar/:id"} element={<KarigarDetail />} />
           <Route exact path={"/Karigar/:id/:orderId"} element={<KarigarorderDetail />} />
           <Route exact path={"/Merchents/:id"} element={<MerchentDetail />} />
-          <Route exact path={"/Merchents/:id/:orderId"} element={<KarigarorderDetail />} />
+          <Route exact path={"/Merchents/:id/:orderId"} element={<MerchentOrderDetail />} />
+          <Route exact path={"/Merchents/product/:id"} element={<MerchentProductDetail />} />
+          <Route exact path={"/Architech/:id"} element={<ArchitechDetail />} />
+          <Route exact path={"/Architech/:id/:orderId"} element={<ArchitechorderDetail />} />
+          <Route exact path={"/Payments/Karigar/:id/:orderId"} element={<KarigarPaymentorderDetail />} />
+          <Route exact path={"/Payments/Merchant/:id/:orderId"} element={<MerchentPaymentOrderDetail />} />
         </Routes>
         <div className="text-blue-gray-600">
           <Footer />
