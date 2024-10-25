@@ -100,7 +100,7 @@ export function ArchitechPayments() {
       
           try {
             const response = await fetch(
-              `http://localhost:4040/api/v1/architect/setteledPayment/${architechId}/${orderId}`,
+              `https://karigar-server-new.onrender.com/api/v1/architect/setteledPayment/${architechId}/${orderId}`,
               requestOptions
             );
             const result = await response.json();
