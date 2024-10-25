@@ -9,6 +9,7 @@ import {
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Merchant from "./pages/dashboard/Merchent";
+import Users from "./pages/dashboard/Users";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -34,7 +35,8 @@ export const routes = [
         icon: <TableCellsIcon {...icon} />,
         name: "User",
         path: "/User",
-        element: <Tables />,
+        element: <Users />,
+        
       },
       {
         icon: <TableCellsIcon {...icon} />,

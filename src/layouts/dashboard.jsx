@@ -12,6 +12,7 @@ import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 import KarigarDetail from "@/pages/dashboard/karigarDetail";
 import KarigarorderDetail from "@/pages/dashboard/KarigarorderDetail";
 import MerchentDetail from "@/pages/dashboard/MerchentDetails";
+import UserDetails from "@/pages/dashboard/UserDetails";
 
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -49,6 +50,7 @@ export function Dashboard() {
           <Route exact path={"/Karigar/:id/:orderId"} element={<KarigarorderDetail />} />
           <Route exact path={"/Merchents/:id"} element={<MerchentDetail />} />
           <Route exact path={"/Merchents/:id/:orderId"} element={<KarigarorderDetail />} />
+          <Route exact path={"/User/:id"} element={<UserDetails />} />
         </Routes>
         <div className="text-blue-gray-600">
           <Footer />
