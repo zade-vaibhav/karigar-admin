@@ -26,6 +26,7 @@ export function Tables() {
       );
       const result = await response.json();
       if (result.success === true) {
+        console.log(result.labors[4])
         setWorkers(result.labors);
         setFilteredWorkers(result.labors); // Set initial filtered workers to all workers
       }

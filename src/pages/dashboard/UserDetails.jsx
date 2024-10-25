@@ -205,7 +205,7 @@ export function MerchentDetail() {
                         <table className="w-full min-w-[640px] table-auto border">
                                 <thead>
                                     <tr>
-                                        {["Id", "Karigar Name","Date",  "Slots", "Booking Type","Price",""].map((el) => (
+                                        {["Id", "Karigar Name", "Karigar Phone","Date",  "Slots", "Booking Type",""].map((el) => (
                                             <th
                                                 key={el}
                                                 className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -221,7 +221,7 @@ export function MerchentDetail() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {user?orde?.map(({ _id, labourId,dateAndTime,payment }, key) => {
+                                    {user?.map(({ _id, productName, brandName,quantity,price, productType }, key) => {
                                         const className = `py-3 px-5 ${key === (products?.length ?? 0) - 1 ? "" : "border-b border-blue-gray-50"}`;
 
                                         return (
@@ -240,7 +240,7 @@ export function MerchentDetail() {
                                                 {/* Customer Name and Date */}
                                                 <td className={className}>
                                                     <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                        {labourId.name || "No Name"}
+                                                        {productName || "No Name"}
                                                     </Typography>
 
                                                 </td>
@@ -248,25 +248,25 @@ export function MerchentDetail() {
                                                 {/* Status Placeholder */}
                                                 <td className={className}>
                                                     <Typography className="text-xs font-normal text-blue-gray-500">
-                                                        {dateAndTime.date}
+                                                        {brandName}
                                                     </Typography>
                                                 </td>
 
                                                 {/* Address */}
                                                 <td className={className}>
                                                     <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                        {dateAndTime.slots}
+                                                        {quantity}
                                                     </Typography>
                                                 </td>
                                                 <td className={className}>
                                                     <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                        {dateAndTime.bookingType} 
+                                                        {price} Rs
                                                     </Typography>
                                                 </td>
 
                                                 <td className={className}>
                                                     <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {payment.paymentDetails.price} Rs
+                                                    {productType} 
                                                     </Typography>
                                                 </td>
                                                 {/* View Link */}
@@ -293,7 +293,7 @@ export function MerchentDetail() {
                            
                         </CardBody>
                     </div>
-                    // <div className="px-4 pb-4">
+                    <div className="px-4 pb-4">
                         <Typography variant="h6" color="blue-gray" className="mb-2">
                            My Orders
                         </Typography>

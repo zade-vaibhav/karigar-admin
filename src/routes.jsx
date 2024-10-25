@@ -9,7 +9,9 @@ import {
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Merchant from "./pages/dashboard/Merchent";
-import Users from "./pages/dashboard/Users";
+import Payments from "./pages/dashboard/Payments";
+import ArchiTech from "./pages/ArchiTech";
+import Users from "./pages/dashboard/Users"
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -25,12 +27,12 @@ export const routes = [
         path: "/home",
         element: <Home />,
       },
-      {
-        icon: <UserCircleIcon {...icon} />,
-        name: "profile",
-        path: "/profile",
-        element: <Profile />,
-      },
+      // {
+      //   icon: <UserCircleIcon {...icon} />,
+      //   name: "profile",
+      //   path: "/profile",
+      //   element: <Profile />,
+      // },
       {
         icon: <TableCellsIcon {...icon} />,
         name: "User",
@@ -54,14 +56,20 @@ export const routes = [
         icon: <TableCellsIcon {...icon} />,
         name: "Architech",
         path: "/Architech",
-        element: <Tables />,
+        element: <ArchiTech />,
       },
       {
-        icon: <InformationCircleIcon {...icon} />,
-        name: "notifications",
-        path: "/notifications",
-        element: <Notifications />,
+        icon: <TableCellsIcon {...icon} />,
+        name: "Payments",
+        path: "/Payments",
+        element: <Payments />,
       },
+      // {
+      //   icon: <InformationCircleIcon {...icon} />,
+      //   name: "notifications",
+      //   path: "/notifications",
+      //   element: <Notifications />,
+      // },
     ],
   },
   {
