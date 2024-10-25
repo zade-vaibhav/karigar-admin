@@ -143,7 +143,7 @@ export function ArchitechPayments() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredArchitechOrders.map(({ payment,concern,createdAt }, key) => {
+                                {filteredArchitechOrders.map(({ _id,payment,concern,createdAt }, key) => {
                                     const className = `py-3 px-5 ${key === filteredArchitechOrders.length - 1
                                             ? ""
                                             : "border-b border-blue-gray-50"
@@ -201,7 +201,7 @@ export function ArchitechPayments() {
                                             </td>
                                             <td className={className}>
                                                 <Link
-                                                    //   to={`/dashboard/Karigar/${_id}`}
+                                                    to={`/dashboard/Payments/Architech/${payment?.paymentDetails?.payee._id}/${_id}/`}
                                                     className="text-xs font-semibold text-blue-gray-600"
                                                 >
                                                     View

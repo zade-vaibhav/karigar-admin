@@ -18,6 +18,7 @@ import KarigarPaymentorderDetail from "@/pages/dashboard/Payments/KarigarPayment
 import MerchentPaymentOrderDetail from "@/pages/dashboard/Payments/MerchentPaymentOrderDetail";
 import ArchitechDetail from "@/pages/ArchitechDetail";
 import ArchitechorderDetail from "@/pages/ArchitechOrderDetailPage";
+import ArchitechPaymentorderDetail from "@/pages/dashboard/Payments/ArchitechpaymentOrderDetail";
 
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -60,6 +61,7 @@ export function Dashboard() {
           <Route exact path={"/Architech/:id/:orderId"} element={<ArchitechorderDetail />} />
           <Route exact path={"/Payments/Karigar/:id/:orderId"} element={<KarigarPaymentorderDetail />} />
           <Route exact path={"/Payments/Merchant/:id/:orderId"} element={<MerchentPaymentOrderDetail />} />
+          <Route exact path={"/Payments/Architech/:id/:orderId"} element={<ArchitechPaymentorderDetail />} />
         </Routes>
         <div className="text-blue-gray-600">
           <Footer />
