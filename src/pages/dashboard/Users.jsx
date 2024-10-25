@@ -14,6 +14,7 @@ export function Tables() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
 
+
   async function getAllUsers() {
     const requestOptions = {
       method: "GET",
@@ -27,6 +28,7 @@ export function Tables() {
       const result = await response.json();
       if (result.success === true) {
         setUsers(result.users);
+      
         setFilteredUsers(result.users); // Set initial filtered workers to all workers
       }
     } catch (error) {
