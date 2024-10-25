@@ -20,6 +20,7 @@ import ArchitechDetail from "@/pages/ArchitechDetail";
 import ArchitechorderDetail from "@/pages/ArchitechOrderDetailPage";
 import ArchitechPaymentorderDetail from "@/pages/dashboard/Payments/ArchitechpaymentOrderDetail";
 import UserDetails from "../pages/dashboard/UserDetails"
+import UserProductOrder from "@/pages/dashboard/UserProductOrder";
 
 
 export function Dashboard() {
@@ -65,6 +66,7 @@ export function Dashboard() {
           <Route exact path={"/Payments/Merchant/:id/:orderId"} element={<MerchentPaymentOrderDetail />} />
           <Route exact path={"/Payments/Architech/:id/:orderId"} element={<ArchitechPaymentorderDetail />} />
            <Route exact path={"/User/:id"} element={<UserDetails />} />
+           <Route exact path={"/User/:id/:orderId"} element={<UserProductOrder />} />
         </Routes>
         <div className="text-blue-gray-600">
           <Footer />

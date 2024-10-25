@@ -26,24 +26,25 @@ export function UsertDetail() {
         const requestOptions = {
             method: "GET",
         };
-
+       if (id) {
+    
         try {
             const response = await fetch(`https://karigar-server-new.onrender.com/api/v1/user/getUser/${id}`, requestOptions);
             const result = await response.json();
-         console.log("000",result.user)
+        
             if (result.success == true) {
                 setUser(result.user)
             }
         } catch (error) {
             console.error(error);
         }
+      }
     }
    
 
     useEffect(() => {
         async function callFunction() {
             await getUser()
-            console.log("000",user)
         }
         callFunction()
     }, [])
@@ -84,7 +85,7 @@ export function UsertDetail() {
                             title="Profile Information"
                            
                             details={{
-                                "first name": `${user?.name}`,
+                                "name": `${user?.name}`,
                                 mobile: `${user?.mobile_number}`,
                                 // location: `${user?.address[0]?.addressLine?user?.address[0]?.addressLine: null} ${user?.address[0]?.city?user?.address[0]?.city: null}, ${user?.address[0]?.state?user?.address[0]?.state: null} ,${user?.address[0]?.pincode?user?.address[0]?.pincode: null}`,
                                
@@ -151,7 +152,7 @@ export function UsertDetail() {
                                                 {/* Status Placeholder */}
                                                 <td className={className}>
                                                     <Typography className="text-xs font-normal text-blue-gray-500">
-                                                        {dateAndTime.date}
+                                                        {dateAndTime.date.slice(0, 10)}
                                                     </Typography>
                                                 </td>
 
@@ -213,6 +214,7 @@ export function UsertDetail() {
                         </CardBody>
                     </div>
 
+{/* ProductOrder details */}
                     <div className="px-4 pb-4">
                         <Typography variant="h6" color="blue-gray" className="mb-2">
                           My Product Orders
@@ -223,7 +225,7 @@ export function UsertDetail() {
                         <table className="w-full min-w-[640px] table-auto border">
                                 <thead>
                                     <tr>
-                                        {["Product", "Quantity & Price", "Status", "total",""].map((el) => (
+                                        {["Product Id", "Quantity & Price", "total", "Status",""].map((el) => (
                                             <th
                                                 key={el}
                                                 className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -240,7 +242,174 @@ export function UsertDetail() {
                                 </thead>
                                 <tbody>
                                   
-                                        
+                                           {user?.productOrders?.map(({ _id, orderStatus, payment, bookingQuantity, price, productId, deleveryAddress }, key) => {
+                                        const className = `py-3 px-5 ${key === (user?.productOrders?.length ?? 0) - 1 ? "" : "border-b border-blue-gray-50"}`;
+
+                                        return (
+                                            <tr key={_id}>
+                                                {/* Worker ID */}
+                                                <td className={className}>
+                                                    <div className="flex items-center gap-4">
+                                                        <div>
+                                                            <Typography variant="small" color="blue-gray" className="font-semibold">
+                                                                {productId || "No ID"}
+                                                            </Typography>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                               
+
+                                                {/* Status Placeholder */}
+                                                <td className={className}>
+                                                    <Typography className="text-xs font-normal text-blue-gray-500">
+                                                        {bookingQuantity} Qnt / {price} Rs
+                                                    </Typography>
+                                                </td>
+
+                                                <td className={className}>
+                                                    <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                    {payment?.paymentDetails?.finalPrice} Rs
+                                                    </Typography>
+                                                </td>
+
+                                               
+                                                <td className={className}>
+                                                    <Typography
+                                                        className={`text-xs font-semibold ${orderStatus === "pending"
+                                                            ? "text-yellow-600"
+                                                            : orderStatus === "accepted"
+                                                                ? "text-blue-600"
+                                                                : orderStatus === "completed"
+                                                                    ? "text-green-600"
+                                                                    : orderStatus === "rejected"
+                                                                        ? "text-red-600"
+                                                                        : "text-gray-600"
+                                                            }`}
+                                                    >
+                                                        {orderStatus}
+                                                    </Typography>
+                                                </td>
+
+                                                
+                                                {/* View Link */}
+                                                <td className={className}>
+                                                    <Link to={`/dashboard/User/${id}/${_id}`} className="text-xs font-semibold text-blue-gray-600">
+                                                        View
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                        );
+                                    }) || (
+                                            <tr>
+                                                <td colSpan="5" className="text-center py-4">
+                                                    No orders available
+                                                </td>
+                                            </tr>
+                                        )}
+                                </tbody>
+
+
+                            </table>
+                             </div>
+                           
+                        </CardBody>
+                    </div>
+
+{/* Architect Order details */}
+
+ <div className="px-4 pb-4">
+                        <Typography variant="h6" color="blue-gray" className="mb-2">
+                          My Architect Orders
+                        </Typography>
+                       
+                        <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+                        <div className="overflow-y-auto max-h-[60vh]">
+                        <table className="w-full min-w-[640px] table-auto border">
+                                <thead>
+                                    <tr>
+                                        {["Architect Id", "Date", "Price",  "Status",""].map((el) => (
+                                            <th
+                                                key={el}
+                                                className="border-b border-blue-gray-50 py-3 px-5 text-left"
+                                            >
+                                                <Typography
+                                                    variant="small"
+                                                    className="text-[11px] font-bold uppercase text-blue-gray-400"
+                                                >
+                                                    {el}
+                                                </Typography>
+                                            </th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  
+                                           {user?.architectOrders?.map(({ _id, status, createdAt, architectId, price}, key) => {
+                                        const className = `py-3 px-5 ${key === (user?.architectOrders?.length ?? 0) - 1 ? "" : "border-b border-blue-gray-50"}`;
+
+                                        return (
+                                            <tr key={_id}>
+                                                {/* Worker ID */}
+                                                <td className={className}>
+                                                    <div className="flex items-center gap-4">
+                                                        <div>
+                                                            <Typography variant="small" color="blue-gray" className="font-semibold">
+                                                                {architectId || "No ID"}
+                                                            </Typography>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                               
+
+                                                {/* Status Placeholder */}
+                                                <td className={className}>
+                                                    <Typography className="text-xs font-normal text-blue-gray-500">
+                                                        {createdAt.slice(0,10)}
+                                                    </Typography>
+                                                </td>
+
+                                                <td className={className}>
+                                                    <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                    {price} Rs
+                                                    </Typography>
+                                                </td>
+
+                                               
+                                                <td className={className}>
+                                                    <Typography
+                                                        className={`text-xs font-semibold ${status === "pending"
+                                                            ? "text-yellow-600"
+                                                            : status === "accepted"
+                                                                ? "text-blue-600"
+                                                                : status === "completed"
+                                                                    ? "text-green-600"
+                                                                    : status === "rejected"
+                                                                        ? "text-red-600"
+                                                                        : "text-gray-600"
+                                                            }`}
+                                                    >
+                                                        {status}
+                                                    </Typography>
+                                                </td>
+
+                                                
+                                                {/* View Link */}
+                                                <td className={className}>
+                                                    <Link to={`/dashboard/Merchents/${id}/${_id}`} className="text-xs font-semibold text-blue-gray-600">
+                                                        View
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                        );
+                                    }) || (
+                                            <tr>
+                                                <td colSpan="5" className="text-center py-4">
+                                                    No orders available
+                                                </td>
+                                            </tr>
+                                        )}
                                 </tbody>
 
 
@@ -260,77 +429,4 @@ export default UsertDetail;
 
 
 
-                //  {user?.productOrders?.map(({ _id, userId, payment,bookingQuantity,price, productId, deleveryAddress }, key) => {
-                //                         const className = `py-3 px-5 ${key === (merchents?.orders?.length ?? 0) - 1 ? "" : "border-b border-blue-gray-50"}`;
-
-                //                         return (
-                //                             <tr key={_id}>
-                //                                 {/* Worker ID */}
-                //                                 <td className={className}>
-                //                                     <div className="flex items-center gap-4">
-                //                                         <div>
-                //                                             <Typography variant="small" color="blue-gray" className="font-semibold">
-                //                                                 {productId?.productName || "No ID"}
-                //                                             </Typography>
-                //                                         </div>
-                //                                     </div>
-                //                                 </td>
-
-                //                                 {/* Customer Name and Date */}
-                //                                 <td className={className}>
-                //                                     <Typography className="text-xs font-semibold text-blue-gray-600">
-                //                                         {userId?.name || "No Name"}
-                //                                     </Typography>
-
-                //                                 </td>
-
-                //                                 {/* Status Placeholder */}
-                //                                 <td className={className}>
-                //                                     <Typography className="text-xs font-normal text-blue-gray-500">
-                //                                         {bookingQuantity} Qnt / {price} Rs
-                //                                     </Typography>
-                //                                 </td>
-
-                //                                 {/* Address */}
-                //                                 <td className={className}>
-                //                                     <Typography className="text-xs font-semibold text-blue-gray-600">
-                //                                         {deleveryAddress?.addressLine+"..." || "No Address"}
-                //                                     </Typography>
-                //                                 </td>
-                //                                 <td className={className}>
-                //                                     <Typography
-                //                                         className={`text-xs font-semibold ${orderStatus === "pending"
-                //                                             ? "text-yellow-600"
-                //                                             : orderStatus === "accepted"
-                //                                                 ? "text-blue-600"
-                //                                                 : orderStatus === "completed"
-                //                                                     ? "text-green-600"
-                //                                                     : orderStatus === "rejected"
-                //                                                         ? "text-red-600"
-                //                                                         : "text-gray-600"
-                //                                             }`}
-                //                                     >
-                //                                         {orderStatus}
-                //                                     </Typography>
-                //                                 </td>
-
-                //                                 <td className={className}>
-                //                                     <Typography className="text-xs font-semibold text-blue-gray-600">
-                //                                     {bookingQuantity*price} Rs
-                //                                     </Typography>
-                //                                 </td>
-                //                                 {/* View Link */}
-                //                                 <td className={className}>
-                //                                     <Link to={`/dashboard/Merchents/${id}/${_id}`} className="text-xs font-semibold text-blue-gray-600">
-                //                                         View
-                //                                     </Link>
-                //                                 </td>
-                //                             </tr>
-                //                         );
-                //                     }) || (
-                //                             <tr>
-                //                                 <td colSpan="5" className="text-center py-4">
-                //                                     No orders available
-                //                                 </td>
-                //                             </tr>
-                //                         )}
+              
