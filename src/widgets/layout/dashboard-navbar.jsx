@@ -35,20 +35,18 @@ export function DashboardNavbar() {
   return (
     <Navbar
       color={fixedNavbar ? "white" : "transparent"}
-      className={`rounded-xl transition-all ${
-        fixedNavbar
+      className={`rounded-xl transition-all ${fixedNavbar
           ? "sticky top-4 z-40 py-3 shadow-md shadow-blue-gray-500/5"
           : "px-0 py-1"
-      }`}
+        }`}
       fullWidth
       blurred={fixedNavbar}
     >
       <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
         <div className="capitalize">
           <Breadcrumbs
-            className={`bg-transparent p-0 transition-all ${
-              fixedNavbar ? "mt-1" : ""
-            }`}
+            className={`bg-transparent p-0 transition-all ${fixedNavbar ? "mt-1" : ""
+              }`}
           >
             <Link to={`/${layout}`}>
               <Typography
@@ -72,7 +70,7 @@ export function DashboardNavbar() {
           </Typography>
         </div>
         <div className="flex items-center">
-         
+
           <IconButton
             variant="text"
             color="blue-gray"
@@ -99,11 +97,7 @@ export function DashboardNavbar() {
             </IconButton>
           </Link>
           <Menu>
-            <MenuHandler>
-              <IconButton variant="text" color="blue-gray">
-                <BellIcon className="h-5 w-5 text-blue-gray-500" />
-              </IconButton>
-            </MenuHandler>
+
             <MenuList className="w-max border-0">
               <MenuItem className="flex items-center gap-3">
                 <Avatar

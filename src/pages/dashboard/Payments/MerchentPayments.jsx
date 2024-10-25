@@ -14,6 +14,7 @@ export function MerchentPayments() {
     const [allOrders, setAllOrders] = useState([]); // Store all orders
     const [dateFilter, setDateFilter] = useState(""); // State for date filter
     const [searchQuery, setSearchQuery] = useState(""); // State for search query
+    const [relode,setRelode] =useState(false)
 
     // Fetch all labors and their orders
     async function getMerchent() {
@@ -43,7 +44,7 @@ export function MerchentPayments() {
             await getMerchent();
         }
         callFunction();
-    }, []);
+    }, [relode]);
 
     // Function to filter orders based on selected date and search query
     const filterOrders = () => {
@@ -83,6 +84,37 @@ export function MerchentPayments() {
         filterOrders();
     }, [dateFilter, searchQuery]);
 //   console.log(allOrders)
+async function handelSettel(merchentId, orderId) {
+        // Confirmation alert
+        const isConfirmed = window.confirm("Are you sure you want to settle this payment?");
+        
+        if (isConfirmed) {
+          console.log(merchentId, " ", orderId);
+          const requestOptions = {
+            method: "PUT",
+          };
+      
+          try {
+            const response = await fetch(
+              `https://karigar-server-new.onrender.com/api/v1/merchent/setteledPayment/${merchentId}/${orderId}`,
+              requestOptions
+            );
+            const result = await response.json();
+            console.log(result);
+            if (result.success === true) {
+              console.log(result);
+              setRelode(!relode)
+              // You can add additional actions here if needed, like updating the UI
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        } else {
+          console.log("Payment settlement canceled.");
+        }
+      }
+      
+
     return (
         <div className="h-full mt-12 mb-8 flex flex-col gap-12">
             <Card>
@@ -122,6 +154,7 @@ export function MerchentPayments() {
                                         "Total Price",
                                         "Payment Type",
                                         "Payment Status",
+                                        "Settelment",
                                         "",
                                     ].map((el) => (
                                         <th
@@ -188,6 +221,21 @@ export function MerchentPayments() {
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
                                                     {payment?.paymentStatus}
+                                                </Typography>
+                                            </td>
+                                             <td className={className}>
+                                                <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                    {payment?.Setteled ? (
+                                                        // If `setteled` is true, show a green button
+                                                        <button className="bg-green-500 text-white px-2 py-1 rounded">
+                                                            Setteled
+                                                        </button>
+                                                    ) : (
+                                                        // If `setteled` is false, show a yellow button
+                                                        <button onClick={() => handelSettel(payment?.paymentDetails?.payee._id, _id)} className="bg-orange-500 text-white px-2 py-1 rounded">
+                                                            Settle
+                                                        </button>
+                                                    )}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
