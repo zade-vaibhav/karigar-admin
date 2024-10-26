@@ -19,9 +19,10 @@ import MerchentPaymentOrderDetail from "@/pages/dashboard/Payments/MerchentPayme
 import ArchitechDetail from "@/pages/ArchitechDetail";
 import ArchitechorderDetail from "@/pages/ArchitechOrderDetailPage";
 import ArchitechPaymentorderDetail from "@/pages/dashboard/Payments/ArchitechpaymentOrderDetail";
-import UserDetails from "../pages/dashboard/UserDetails"
+import UserDetails from "../pages/dashboard/UserDetails";
 import UserProductOrder from "@/pages/dashboard/UserProductOrder";
-
+import UserKarigarOrder from "@/pages/dashboard/UserKarigarOrder";
+import UserArchitectOrder from "@/pages/dashboard/UserArchitecOrder";
 
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -56,17 +57,59 @@ export function Dashboard() {
               ))
           )}
           <Route exact path={"/Karigar/:id"} element={<KarigarDetail />} />
-          <Route exact path={"/Karigar/:id/:orderId"} element={<KarigarorderDetail />} />
+          <Route
+            exact
+            path={"/Karigar/:id/:orderId"}
+            element={<KarigarorderDetail />}
+          />
           <Route exact path={"/Merchents/:id"} element={<MerchentDetail />} />
-          <Route exact path={"/Merchents/:id/:orderId"} element={<MerchentOrderDetail />} />
-          <Route exact path={"/Merchents/product/:id"} element={<MerchentProductDetail />} />
+          <Route
+            exact
+            path={"/Merchents/:id/:orderId"}
+            element={<MerchentOrderDetail />}
+          />
+          <Route
+            exact
+            path={"/Merchents/product/:id"}
+            element={<MerchentProductDetail />}
+          />
           <Route exact path={"/Architech/:id"} element={<ArchitechDetail />} />
-          <Route exact path={"/Architech/:id/:orderId"} element={<ArchitechorderDetail />} />
-          <Route exact path={"/Payments/Karigar/:id/:orderId"} element={<KarigarPaymentorderDetail />} />
-          <Route exact path={"/Payments/Merchant/:id/:orderId"} element={<MerchentPaymentOrderDetail />} />
-          <Route exact path={"/Payments/Architech/:id/:orderId"} element={<ArchitechPaymentorderDetail />} />
-           <Route exact path={"/User/:id"} element={<UserDetails />} />
-           <Route exact path={"/User/:id/:orderId"} element={<UserProductOrder />} />
+          <Route
+            exact
+            path={"/Architech/:id/:orderId"}
+            element={<ArchitechorderDetail />}
+          />
+          <Route
+            exact
+            path={"/Payments/Karigar/:id/:orderId"}
+            element={<KarigarPaymentorderDetail />}
+          />
+          <Route
+            exact
+            path={"/Payments/Merchant/:id/:orderId"}
+            element={<MerchentPaymentOrderDetail />}
+          />
+          <Route
+            exact
+            path={"/Payments/Architech/:id/:orderId"}
+            element={<ArchitechPaymentorderDetail />}
+          />
+          <Route exact path={"/User/:id"} element={<UserDetails />} />
+          <Route
+            exact
+            path={"/User/Product/:id/:orderId"}
+            element={<UserProductOrder />}
+          />
+          <Route
+            exact
+            path={"/User/Karigar/:id/:orderId"}
+            element={<UserKarigarOrder />}
+          />
+          <Route
+            exact
+            path={"/User/Architect/:id/:orderId"}
+            element={<UserArchitectOrder />}
+          />
         </Routes>
         <div className="text-blue-gray-600">
           <Footer />

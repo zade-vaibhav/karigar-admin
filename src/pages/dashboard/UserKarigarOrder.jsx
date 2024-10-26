@@ -16,11 +16,11 @@ const sampleImages = [
   "/img/sample3.jpg",
 ];
 
-export function UserProductOrder() {
+export function UserKarigarOrder() {
   const { id, orderId } = useParams();
   const [userOrder, setUserOrder] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  console.log(id, orderId);
+  //   console.log(id, orderId);
   // Fetch labor details
   async function getUser() {
     const requestOptions = {
@@ -32,10 +32,12 @@ export function UserProductOrder() {
         requestOptions
       );
       const result = await response.json();
+
       if (result.success === true) {
-        const Order = result.user.productOrders.filter((ele) => {
+        const Order = result.user.orders.filter((ele) => {
           return ele._id === orderId;
         });
+
         setUserOrder(Order[0]);
       }
     } catch (error) {
@@ -45,8 +47,8 @@ export function UserProductOrder() {
 
   useEffect(() => {
     getUser();
-  }, []);
-  console.log("000", userOrder);
+  }, [id, orderId]);
+  //   console.log("000", userOrder);
   // Handle next image
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -65,18 +67,18 @@ export function UserProductOrder() {
     <>
       <CardHeader variant="gradient" color="gray" className="mt-8 p-6">
         <Typography variant="h6" color="white">
-          User Material Order Details Page
+          User Karigar Order Details Page
         </Typography>
       </CardHeader>
       {/* Carousel Section */}
       <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl">
         {/* Images */}
-        {/* <div
-                    className="h-full w-full bg-cover bg-center"
-                    style={{
-                        backgroundImage: `url(${userOrder?.productId?.images[currentImageIndex]})`,
-                    }}
-                ></div> */}
+        <div
+          className="h-full w-full bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${userOrder?.workDetails?.images[currentImageIndex]})`,
+          }}
+        ></div>
         <div className="absolute inset-0 h-full w-full bg-gray-900/50" />
 
         {/* Previous Button */}
@@ -104,30 +106,28 @@ export function UserProductOrder() {
               title="Order Detail"
               details={{
                 "Order ID": `${userOrder?._id}`,
-                // "Product name": `${userOrder?.productId?.productName}`,
-                // "Brand Name": `${userOrder?.productId?.brandName}`,
-                "Booked Quantity": `${userOrder?.bookingQuantity}`,
+                "Work Title": `${userOrder?.workDetails?.workTitle}`,
+                "Work Description": `${userOrder?.workDetails?.workDescription}`,
+                // "Booked Quantity": `${userOrder?.bookingQuantity}`,
                 Price: `${userOrder?.payment?.paymentDetails.price}`,
-                "Total Price": `${userOrder?.payment?.paymentDetails?.finalPrice} Rs`,
-                "Shipping Address": `${
-                  userOrder?.deleveryAddress?.addressLine || null
-                }, ${userOrder?.deleveryAddress?.city || null}, ${
-                  userOrder?.deleveryAddress?.state || null
-                }, ${userOrder?.deleveryAddress?.pincode || null}`,
-                "Order Status": `${userOrder?.orderStatus}`,
+                // "Total Price": `${userOrder?.payment?.paymentDetails?.finalPrice} Rs`,
+                "Site Address": `${userOrder?.address || null}`,
+                "Order Status": `${userOrder?.status}`,
               }}
             />
 
             {/* Customer Details */}
             <ProfileInfoCard
-              title="Merchant Detail"
-              details={
-                {
-                  // Name: `${userOrder?.userId?.name}`,
-                  // Email: `${userOrder?.userId?.email}`,
-                  // "Mobile Number": `${userOrder?.userId?.mobile_number}`,
-                }
-              }
+              title="Karigar Detail"
+              details={{
+                Name: `${userOrder?.labourId?.name}`,
+                Phone: `${userOrder?.labourId?.mobile_number.slice(2, 12)}`,
+                Designation: `${userOrder?.labourId?.designation}`,
+                "Account No": `${userOrder?.labourId?.bankDetails.accountNumber}`,
+                "IFSC Code": `${userOrder?.labourId?.bankDetails.ifscCode}`,
+                "Bank Name": `${userOrder?.labourId?.bankDetails.bankName}`,
+                "A/c Holder Name": `${userOrder?.labourId?.bankDetails.accountHolderName}`,
+              }}
             />
 
             {/* Payment Details */}
@@ -136,7 +136,7 @@ export function UserProductOrder() {
               details={{
                 "Payment ID": `${userOrder?.payment?.paymentId}`,
                 "Payment To": `${userOrder?.payment?.paymentDetails?.payee}`,
-                "Payment Price": `${userOrder?.payment?.paymentDetails?.finalPrice} Rs`,
+                "Payment Price": `${userOrder?.payment?.paymentDetails?.price} Rs`,
                 "Payment Type": `${userOrder?.payment?.paymentType}`,
                 "Payment Mode": `${userOrder?.payment?.paymentMode}`,
                 "Payment Status": `${userOrder?.payment?.paymentStatus}`,
@@ -153,4 +153,4 @@ export function UserProductOrder() {
   );
 }
 
-export default UserProductOrder;
+export default UserKarigarOrder;

@@ -16,11 +16,11 @@ const sampleImages = [
   "/img/sample3.jpg",
 ];
 
-export function UserProductOrder() {
+export function UserArchitectOrder() {
   const { id, orderId } = useParams();
   const [userOrder, setUserOrder] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  console.log(id, orderId);
+  //   console.log(userOrder?.images);
   // Fetch labor details
   async function getUser() {
     const requestOptions = {
@@ -33,7 +33,7 @@ export function UserProductOrder() {
       );
       const result = await response.json();
       if (result.success === true) {
-        const Order = result.user.productOrders.filter((ele) => {
+        const Order = result.user.architectOrders.filter((ele) => {
           return ele._id === orderId;
         });
         setUserOrder(Order[0]);
@@ -71,12 +71,12 @@ export function UserProductOrder() {
       {/* Carousel Section */}
       <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl">
         {/* Images */}
-        {/* <div
-                    className="h-full w-full bg-cover bg-center"
-                    style={{
-                        backgroundImage: `url(${userOrder?.productId?.images[currentImageIndex]})`,
-                    }}
-                ></div> */}
+        <div
+          className="h-full w-full bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${userOrder?.images[currentImageIndex]})`,
+          }}
+        ></div>
         <div className="absolute inset-0 h-full w-full bg-gray-900/50" />
 
         {/* Previous Button */}
@@ -106,21 +106,21 @@ export function UserProductOrder() {
                 "Order ID": `${userOrder?._id}`,
                 // "Product name": `${userOrder?.productId?.productName}`,
                 // "Brand Name": `${userOrder?.productId?.brandName}`,
-                "Booked Quantity": `${userOrder?.bookingQuantity}`,
+                // "Booked Quantity": `${userOrder?.bookingQuantity}`,
                 Price: `${userOrder?.payment?.paymentDetails.price}`,
-                "Total Price": `${userOrder?.payment?.paymentDetails?.finalPrice} Rs`,
-                "Shipping Address": `${
-                  userOrder?.deleveryAddress?.addressLine || null
-                }, ${userOrder?.deleveryAddress?.city || null}, ${
-                  userOrder?.deleveryAddress?.state || null
-                }, ${userOrder?.deleveryAddress?.pincode || null}`,
-                "Order Status": `${userOrder?.orderStatus}`,
+                // "Total Price": `${userOrder?.payment?.paymentDetails?.finalPrice} Rs`,
+                // "Site Address": `${
+                //   userOrder?.deleveryAddress?.addressLine || null
+                // }, ${userOrder?.deleveryAddress?.city || null}, ${
+                //   userOrder?.deleveryAddress?.state || null
+                // }, ${userOrder?.deleveryAddress?.pincode || null}`,
+                "Order Status": `${userOrder?.status}`,
               }}
             />
 
             {/* Customer Details */}
             <ProfileInfoCard
-              title="Merchant Detail"
+              title="Architect Detail"
               details={
                 {
                   // Name: `${userOrder?.userId?.name}`,
@@ -136,7 +136,7 @@ export function UserProductOrder() {
               details={{
                 "Payment ID": `${userOrder?.payment?.paymentId}`,
                 "Payment To": `${userOrder?.payment?.paymentDetails?.payee}`,
-                "Payment Price": `${userOrder?.payment?.paymentDetails?.finalPrice} Rs`,
+                "Payment Price": `${userOrder?.payment?.paymentDetails?.price} Rs`,
                 "Payment Type": `${userOrder?.payment?.paymentType}`,
                 "Payment Mode": `${userOrder?.payment?.paymentMode}`,
                 "Payment Status": `${userOrder?.payment?.paymentStatus}`,
@@ -153,4 +153,4 @@ export function UserProductOrder() {
   );
 }
 
-export default UserProductOrder;
+export default UserArchitectOrder;
