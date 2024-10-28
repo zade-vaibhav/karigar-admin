@@ -7,12 +7,14 @@ import {
 } from "@material-tailwind/react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../components/AuthContext";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null); // State for handling errors
   const navigate = useNavigate(); // Hook for navigation
+  const { login } = useAuth();
 
   // Function to handle the login process
   const handleLogin = async (e) => {
@@ -36,7 +38,7 @@ export function SignIn() {
         // Store the JWT token in local storage
         // localStorage.setItem("token", data.token);
         console.log(data);
-
+        login()
         // Redirect to the dashboard after successful login
         navigate("/dashboard/home");
       } else {

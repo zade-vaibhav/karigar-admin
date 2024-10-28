@@ -5,12 +5,13 @@ import {
   ChartBarIcon,
 } from "@heroicons/react/24/solid";
 
+
 export const statisticsCardsData = [
   {
     color: "gray",
-    icon: BanknotesIcon,
+    icon: UsersIcon,
     title: "Today's Money",
-    value: "$53k",
+    value: "53",
     footer: {
       color: "text-green-500",
       value: "+55%",
