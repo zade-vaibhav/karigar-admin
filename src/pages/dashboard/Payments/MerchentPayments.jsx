@@ -154,6 +154,7 @@ async function handelSettel(merchentId, orderId) {
                                         "Total Price",
                                         "Payment Type",
                                         "Payment Status",
+                                        "booking Date",
                                         "Settelment",
                                         "",
                                     ].map((el) => (
@@ -221,6 +222,11 @@ async function handelSettel(merchentId, orderId) {
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
                                                     {payment?.paymentStatus}
+                                                </Typography>
+                                            </td>
+                                            <td className={className}>
+                                                <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                    {payment?.createdAt.slice(0,10)}
                                                 </Typography>
                                             </td>
                                              <td className={className}>
