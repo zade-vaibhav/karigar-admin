@@ -25,7 +25,6 @@ import {
 } from "@heroicons/react/24/solid";
 import { Link, useParams } from "react-router-dom";
 import { ProfileInfoCard, MessageCard } from "@/widgets/cards";
-import { platformSettingsData, conversationsData, projectsData } from "@/data";
 import { useEffect, useState } from "react";
 
 
@@ -34,13 +33,36 @@ export function KarigarDetail() {
     const [workers, setWorkers] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [wages, setWages] = useState(workers.ratePerHour || "");
+    const [relode,setRelode]= useState(false)
+
 
     // Update Wages Function
-    async function updateWages() {
-        // Function to call API or update state with the new wages
-        console.log("Updated Wages:", wages);
-        // Close modal
-        setIsModalOpen(false);
+    async function updateWages(id, ratePerHour) {
+        if(!ratePerHour){
+            alert("field should not be empty")
+            return 
+        }
+        console.log(id,"  ",ratePerHour)
+            const requestOptions = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ ratePerHour }), // Send ratePerHour in request body
+            };
+        
+            try {
+                const response = await fetch(`https://karigar-server-new.onrender.com/api/v1/labor/labor/${id}/rate`, requestOptions);
+                const result = await response.json();
+                if (result.success === true) {
+                    setIsModalOpen(false);
+                    setRelode(!relode)
+                } else {
+                    console.error("Failed to update rate per hour:", result.message);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
     }
 
 
@@ -66,7 +88,7 @@ export function KarigarDetail() {
             await getlabor()
         }
         callFunction()
-    }, [])
+    }, [relode])
 
     return (
         <>
@@ -322,7 +344,7 @@ export function KarigarDetail() {
                     <Button variant="text" color="red" onClick={() => setIsModalOpen(false)}>
                         Cancel
                     </Button>
-                    <Button variant="gradient" color="blue" onClick={updateWages}>
+                    <Button variant="gradient" color="blue" onClick={()=>updateWages(id,wages)}>
                         Update
                     </Button>
                 </DialogFooter>

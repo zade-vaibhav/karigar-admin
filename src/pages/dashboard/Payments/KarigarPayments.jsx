@@ -156,6 +156,7 @@ export function KarigarPayments() {
                                         "Price",
                                         "Payment Type",
                                         "Payment Status",
+                                        "payment Date",
                                         "Settelment",
                                         "",
                                     ].map((el) => (
