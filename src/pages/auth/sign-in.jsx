@@ -38,7 +38,7 @@ export function SignIn() {
         // Store the JWT token in local storage
         // localStorage.setItem("token", data.token);
         console.log(data);
-        login()
+        login();
         // Redirect to the dashboard after successful login
         navigate("/dashboard/home");
       } else {
@@ -108,7 +108,7 @@ export function SignIn() {
               required
             />
           </div>
-          {error && (
+          {/* {error && (
             <Typography
               variant="small"
               color="red"
@@ -134,7 +134,7 @@ export function SignIn() {
               </Typography>
             }
             containerProps={{ className: "-ml-2.5" }}
-          />
+          /> */}
           <Button
             className="mt-6"
             fullWidth
@@ -143,7 +143,7 @@ export function SignIn() {
             Sign In
           </Button>
 
-          <div className="flex items-center justify-between gap-2 mt-6">
+          {/* <div className="flex items-center justify-between gap-2 mt-6">
             <Checkbox
               label={
                 <Typography
@@ -159,8 +159,8 @@ export function SignIn() {
             <Typography variant="small" className="font-medium text-gray-900">
               <a href="#">Forgot Password</a>
             </Typography>
-          </div>
-          <div className="space-y-4 mt-8">
+          </div> */}
+          {/* <div className="space-y-4 mt-8">
             <Button
               size="lg"
               color="white"
@@ -214,8 +214,8 @@ export function SignIn() {
               <img src="/img/twitter-logo.svg" height={24} width={24} alt="" />
               <span>Sign in With Twitter</span>
             </Button>
-          </div>
-          <Typography
+          </div> */}
+          {/* <Typography
             variant="paragraph"
             className="text-center text-blue-gray-500 font-medium mt-4"
           >
@@ -223,13 +223,13 @@ export function SignIn() {
             <Link to="/auth/sign-up" className="text-gray-900 ml-1">
               Create account
             </Link>
-          </Typography>
+          </Typography> */}
         </form>
       </div>
-      <div className="w-2/5 h-full hidden lg:block">
+      <div className="w-2/5 min-h-screen hidden lg:block">
         <img
           src="/img/pattern.png"
-          className="h-full w-full object-cover rounded-3xl"
+          className="h-3/4 w-full object-cover rounded-3xl"
         />
       </div>
     </section>

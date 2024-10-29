@@ -23,6 +23,7 @@ import UserDetails from "../pages/dashboard/UserDetails";
 import UserProductOrder from "@/pages/dashboard/UserProductOrder";
 import UserKarigarOrder from "@/pages/dashboard/UserKarigarOrder";
 import UserArchitectOrder from "@/pages/dashboard/UserArchitecOrder";
+import EditProduct from "@/pages/dashboard/editProduct";
 
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -109,6 +110,11 @@ export function Dashboard() {
             exact
             path={"/User/Architect/:id/:orderId"}
             element={<UserArchitectOrder />}
+          />
+          <Route
+            exact
+            path={"/Merchents/Editproduct/:id/:productId"}
+            element={<EditProduct />}
           />
         </Routes>
         <div className="text-blue-gray-600">

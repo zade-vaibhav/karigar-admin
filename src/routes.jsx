@@ -11,7 +11,8 @@ import { SignIn, SignUp } from "@/pages/auth";
 import Merchant from "./pages/dashboard/Merchent";
 import Payments from "./pages/dashboard/Payments";
 import ArchiTech from "./pages/ArchiTech";
-import Users from "./pages/dashboard/Users"
+import Users from "./pages/dashboard/Users";
+import AddAdmin from "./pages/AddAdmin";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -38,7 +39,6 @@ export const routes = [
         name: "User",
         path: "/User",
         element: <Users />,
-        
       },
       {
         icon: <TableCellsIcon {...icon} />,
@@ -63,6 +63,12 @@ export const routes = [
         name: "Payments",
         path: "/Payments",
         element: <Payments />,
+      },
+      {
+        icon: <InformationCircleIcon {...icon} />,
+        name: "Add Admin",
+        path: "/addAdmin",
+        element: <AddAdmin />,
       },
       // {
       //   icon: <InformationCircleIcon {...icon} />,
@@ -93,11 +99,3 @@ export const routes = [
 ];
 
 export default routes;
-
-
-
-
-
-
-
-
