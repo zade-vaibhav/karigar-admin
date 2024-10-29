@@ -38,6 +38,9 @@ export function Home() {
   const [users, setUsers] = useState([]);
   const [merchents, setmerchents] = useState([]);
   const [architech, setArchitech] = useState([]);
+  const [allKarigar,setAllKarigar] = useState({})
+
+
 
   async function getLabor() {
     const requestOptions = {
@@ -51,6 +54,23 @@ export function Home() {
       );
       const result = await response.json();
       if (result.success === true) {
+        const designationObject = {};
+
+        // Loop through each worker and categorize them by designation
+        result.labors.forEach((labor) => {
+          const { designation } = labor;
+          
+          // If designation category doesn't exist, create it and initialize with an array
+          if (!designationObject[designation]) {
+            designationObject[designation] = [];
+          }
+
+          // Push the laborer to the corresponding designation category
+          designationObject[designation].push(labor);
+        });
+
+        console.log("Workers organized by designation:", designationObject);
+        setAllKarigar(designationObject)
         setWorkers(result.labors);
       }
     } catch (error) {
@@ -125,6 +145,7 @@ export function Home() {
     }
     callFunction();
   }, []);
+
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
@@ -292,6 +313,37 @@ export function Home() {
         </Card>
       </div>
 
+      <div className="p-6 border border-blue-gray-100 rounded-lg">
+      <Typography variant="h4" className="mb-6">
+        Karigars by Designation
+      </Typography>
+      {Object.keys(allKarigar).length === 0 ? (
+        <Typography variant="h6" className="text-gray-500">
+          Loading karigars...
+        </Typography>
+      ) : (
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+          {Object.entries(allKarigar).map(([designation, workersArray]) => (
+            <Card key={designation} className="relative p-4 w-50 border border-blue-gray-100 shadow-sm rounded-lg overflow-hidden">
+            {/* Background Image with Opacity */}
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-10"
+              style={{
+                backgroundImage: `url("https://static.vecteezy.com/system/resources/thumbnails/049/461/667/small/smiling-team-of-construction-workers-on-a-building-site-wearing-yellow-helmets-photo.jpeg")`, // Replace with your image URL
+              }}
+            ></div>
+          
+            {/* Card Content Centered */}
+            <div className="relative z-10 flex flex-col items-center justify-center text-center">
+              <Typography variant="h6" className="mb-2 font-semibold text-blue-gray-700">
+                {designation ? designation == "undefined"?"Not Specified":designation : "No Designation"} - {workersArray.length} Karigar
+              </Typography>
+            </div>
+          </Card>
+          ))}
+        </div>
+      )}
+    </div>
     </div>
   );
 }
