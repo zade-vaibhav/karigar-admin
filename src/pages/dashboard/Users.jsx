@@ -28,7 +28,7 @@ export function Tables() {
       const result = await response.json();
       if (result.success === true) {
         setUsers(result.users);
-      
+
         setFilteredUsers(result.users); // Set initial filtered workers to all workers
       }
     } catch (error) {
@@ -43,14 +43,15 @@ export function Tables() {
     callFunction();
   }, []);
 
-  // Function to filter workers based on search query
+  // Function to filter users based on search query
   useEffect(() => {
     const filtered = users.filter((user) => {
       const searchText = searchQuery.toLowerCase();
       return (
-        user._id.toLowerCase().includes(searchText) ||
-        user.name.toLowerCase().includes(searchText) ||
-        user.mobile_number.toLowerCase().includes(searchText)
+        user?._id?.toLowerCase().includes(searchText) ||
+        user?.name?.toLowerCase().includes(searchText) ||
+        user?.mobile_number?.toLowerCase().includes(searchText) ||
+        user?.email?.toLowerCase().includes(searchText)
       );
     });
     setFilteredUsers(filtered);
@@ -77,7 +78,7 @@ export function Tables() {
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["ID", "NAME", "Email" , ""].map((el) => (
+                  {["ID", "NAME", "Email", ""].map((el) => (
                     <th
                       key={el}
                       className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -121,9 +122,6 @@ export function Tables() {
                           </Typography>
                           <Typography className="text-xs font-normal text-blue-gray-500">
                             {mobile_number}
-                          </Typography>
-                          <Typography className="text-xs font-normal text-blue-gray-500">
-                            {email}
                           </Typography>
                         </td>
                         {/* <td className={className}>

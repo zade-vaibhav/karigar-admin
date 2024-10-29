@@ -11,6 +11,11 @@ import {
     Switch,
     Tooltip,
     Button,
+    Dialog,
+    DialogHeader,
+    DialogBody,
+    DialogFooter,
+    Input
 } from "@material-tailwind/react";
 import {
     HomeIcon,
@@ -23,9 +28,21 @@ import { ProfileInfoCard, MessageCard } from "@/widgets/cards";
 import { platformSettingsData, conversationsData, projectsData } from "@/data";
 import { useEffect, useState } from "react";
 
+
 export function KarigarDetail() {
     const { id } = useParams();
     const [workers, setWorkers] = useState([])
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [wages, setWages] = useState(workers.ratePerHour || "");
+
+    // Update Wages Function
+    async function updateWages() {
+        // Function to call API or update state with the new wages
+        console.log("Updated Wages:", wages);
+        // Close modal
+        setIsModalOpen(false);
+    }
+
 
     async function getlabor() {
 
@@ -53,11 +70,11 @@ export function KarigarDetail() {
 
     return (
         <>
-         <CardHeader variant="gradient" color="gray" className="mt-8 p-6">
-          <Typography variant="h6" color="white">
-            Karigar Details Page
-          </Typography>
-        </CardHeader>
+            <CardHeader variant="gradient" color="gray" className="mt-8 p-6">
+                <Typography variant="h6" color="white">
+                    Karigar Details Page
+                </Typography>
+            </CardHeader>
             <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl bg-[url('/img/background-image.png')] bg-cover	bg-center">
                 <div className="absolute inset-0 h-full w-full bg-gray-900/75" />
             </div>
@@ -84,6 +101,10 @@ export function KarigarDetail() {
                                 </Typography>
                             </div>
                         </div>
+                        {/* Edit Wages Button */}
+                        <Button size="sm" color="blue" onClick={() => setIsModalOpen(true)}>
+                            Edit Wages
+                        </Button>
                         {/* <div className="w-96">
                             <Tabs value="app">
                                 <TabsHeader>
@@ -138,6 +159,7 @@ export function KarigarDetail() {
                                 "first name": `${workers?.name}`,
                                 mobile: `${workers?.mobile_number}`,
                                 Designation: `${workers?.designation}`,
+                                Wages: `${workers?.ratePerHour} Rs`,
                                 location: `${workers?.address?.addressLine || null} ${workers?.address?.city || null}, ${workers?.address?.state || null} ,${workers?.address?.pincode || null}`,
                                 // social: (
                                 //     <div className="flex items-center gap-4">
@@ -285,6 +307,26 @@ export function KarigarDetail() {
                     </div>
                 </CardBody>
             </Card>
+            {/* Modal for Editing Wages */}
+            <Dialog open={isModalOpen} handler={setIsModalOpen}>
+                <DialogHeader>Edit Wages</DialogHeader>
+                <DialogBody divider>
+                    <Input
+                        label="Wages (in Rs)"
+                        type="number"
+                        value={wages}
+                        onChange={(e) => setWages(e.target.value)}
+                    />
+                </DialogBody>
+                <DialogFooter>
+                    <Button variant="text" color="red" onClick={() => setIsModalOpen(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="gradient" color="blue" onClick={updateWages}>
+                        Update
+                    </Button>
+                </DialogFooter>
+            </Dialog>
         </>
     );
 }

@@ -46,9 +46,9 @@ export function Merchant() {
         const filtered = workers.filter((worker) => {
             const searchText = searchQuery.toLowerCase();
             return (
-                worker._id.toLowerCase().includes(searchText) ||
-                worker.name.toLowerCase().includes(searchText) ||
-                worker.mobile_number.toLowerCase().includes(searchText)
+                worker?._id.toLowerCase().includes(searchText) ||
+                worker?.name.toLowerCase().includes(searchText) ||
+                worker?.mobile_number.toLowerCase().includes(searchText)
             );
         });
         setFilteredWorkers(filtered);
@@ -66,7 +66,7 @@ export function Merchant() {
             <Card>
                 <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
                     <Typography variant="h6" color="white">
-                        Merchants
+                    Karigar-Merchants
                     </Typography>
                 </CardHeader>
                 <CardBody className="overflow-x-auto px-0 pt-0 pb-2">

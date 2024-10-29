@@ -28,10 +28,10 @@ import {
 } from "@/data";
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import Architech from "../../../public/architech.png"
-import Merchent from "../../../public/merchent.png"
-import Worker from "../../../public/worker.png"
-import user from "../../../public/user.png"
+import Architech from "/architech.png"
+import Merchent from "/merchent.png"
+import Worker from "/worker.png"
+import user from "/user.png"
 
 export function Home() {
   const [workers, setWorkers] = useState([]);
@@ -164,7 +164,7 @@ export function Home() {
           </CardBody>
 
           <CardFooter className="border-t border-blue-gray-50 p-4 relative z-10">
-            <Link>Show All</Link>
+            <Link to="/dashboard/User">Show All</Link>
           </CardFooter>
         </Card>
 
@@ -205,7 +205,7 @@ export function Home() {
           </CardBody>
 
           <CardFooter className="border-t border-blue-gray-50 p-4 relative z-10">
-            <Link>Show All</Link>
+            <Link to="/dashboard/Karigar">Show All</Link>
           </CardFooter>
         </Card>
 
@@ -246,7 +246,7 @@ export function Home() {
           </CardBody>
 
           <CardFooter className="border-t border-blue-gray-50 p-4 relative z-10">
-            <Link>Show All</Link>
+            <Link to="/dashboard/Merchents">Show All</Link>
           </CardFooter>
         </Card>
 
@@ -287,7 +287,7 @@ export function Home() {
           </CardBody>
 
           <CardFooter className="border-t border-blue-gray-50 p-4 relative z-10">
-            <Link>Show All</Link>
+            <Link to="/dashboard/Architech">Show All</Link>
           </CardFooter>
         </Card>
       </div>

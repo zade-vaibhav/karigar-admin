@@ -47,9 +47,9 @@ export function Tables() {
     const filtered = workers.filter((worker) => {
       const searchText = searchQuery.toLowerCase();
       return (
-        worker._id.toLowerCase().includes(searchText) ||
-        worker.name.toLowerCase().includes(searchText) ||
-        worker.mobile_number.toLowerCase().includes(searchText)
+        worker?._id?.toLowerCase().includes(searchText) ||
+        worker?.name?.toLowerCase().includes(searchText) ||
+        worker?.mobile_number?.toLowerCase().includes(searchText)
       );
     });
     setFilteredWorkers(filtered);
@@ -93,7 +93,7 @@ export function Tables() {
               </thead>
               <tbody>
                 {filteredWorkers.map(
-                  ({ name, mobile_number, _id, designation, avalablity_status }, key) => {
+                  ({ name, mobile_number, _id, designation, avalablity_status, }, key) => {
                     const className = `py-3 px-5 ${key === workers.length - 1
                       ? ""
                       : "border-b border-blue-gray-50"
