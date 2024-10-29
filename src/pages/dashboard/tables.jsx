@@ -49,7 +49,8 @@ export function Tables() {
       return (
         worker?._id?.toLowerCase().includes(searchText) ||
         worker?.name?.toLowerCase().includes(searchText) ||
-        worker?.mobile_number?.toLowerCase().includes(searchText)
+        worker?.mobile_number?.toLowerCase().includes(searchText) ||
+        worker?.designation?.toLowerCase().includes(searchText)
       );
     });
     setFilteredWorkers(filtered);
