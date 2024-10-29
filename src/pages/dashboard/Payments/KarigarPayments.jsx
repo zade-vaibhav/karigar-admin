@@ -233,6 +233,11 @@ export function KarigarPayments() {
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                    {payment?.createdAt.slice(0,10)}
+                                                </Typography>
+                                            </td>
+                                            <td className={className}>
+                                                <Typography className="text-xs font-semibold text-blue-gray-600">
                                                     {payment?.Setteled ? (
                                                         // If `setteled` is true, show a green button
                                                         <button className="bg-green-500 text-white px-2 py-1 rounded">
