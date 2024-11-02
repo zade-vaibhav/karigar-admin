@@ -13,6 +13,8 @@ import Payments from "./pages/dashboard/Payments";
 import ArchiTech from "./pages/ArchiTech";
 import Users from "./pages/dashboard/Users";
 import AddAdmin from "./pages/AddAdmin";
+import Coupons from "./pages/dashboard/Coupons";
+import ServiceCharges from "./pages/dashboard/ServiceCharges";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -69,6 +71,18 @@ export const routes = [
         name: "Add Admin",
         path: "/addAdmin",
         element: <AddAdmin />,
+      },
+      {
+        icon: <InformationCircleIcon {...icon} />,
+        name: "Coupons",
+        path: "/Coupons",
+        element: <Coupons />,
+      },
+      {
+        icon: <InformationCircleIcon {...icon} />,
+        name: "Service",
+        path: "/Sercvice",
+        element: <ServiceCharges />,
       },
       // {
       //   icon: <InformationCircleIcon {...icon} />,

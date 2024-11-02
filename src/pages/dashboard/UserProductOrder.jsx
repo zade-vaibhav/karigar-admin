@@ -119,7 +119,7 @@ export function UserProductOrder() {
             />
 
             {/* Customer Details */}
-            <ProfileInfoCard
+            {/* <ProfileInfoCard
               title="Merchant Detail"
               details={
                 {
@@ -128,7 +128,7 @@ export function UserProductOrder() {
                   // "Mobile Number": `${userOrder?.userId?.mobile_number}`,
                 }
               }
-            />
+            /> */}
 
             {/* Payment Details */}
             <ProfileInfoCard
