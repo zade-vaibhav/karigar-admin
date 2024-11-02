@@ -39,7 +39,7 @@ const ServiceCharges = () => {
 
   return (
     <div className="p-8 bg-gradient-to-r from-gray-50 to-gray-100 min-h-screen">
-      <h1 className="text-3xl font-extrabold text-gray-800 mb-8">
+      {/* <h1 className="text-3xl font-extrabold text-gray-800 mb-8">
         Service Charges
       </h1>
       <button
@@ -49,7 +49,7 @@ const ServiceCharges = () => {
         Add Service
       </button>
 
-      {/* Service Charges Displayed as Cards */}
+    
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {services.map((service) => (
           <div
@@ -70,7 +70,8 @@ const ServiceCharges = () => {
         ))}
       </div>
 
-      {isModalOpen && <AddServiceChargeModal onClose={handleCloseModal} />}
+      {isModalOpen && <AddServiceChargeModal onClose={handleCloseModal} />} */}
+      <p>Available soon !!</p>
     </div>
   );
 };
