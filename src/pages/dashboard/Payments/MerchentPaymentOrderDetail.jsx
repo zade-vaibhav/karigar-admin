@@ -108,7 +108,7 @@ export function MerchentPaymentOrderDetail() {
                                 "Product name": `${merchentOrder?.productId?.productName}`,
                                 "Brand Name": `${merchentOrder?.productId?.brandName}`,
                                 "Booked Quantity": `${merchentOrder?.bookingQuantity}`,
-                                "Price": `${merchentOrder?.productId?.price}`,
+                                "Price": `${ merchentOrder?.payment?.paymentDetails?.price} Rs`,
                                 "Total Price": `${merchentOrder?.bookingQuantity * merchentOrder?.payment?.paymentDetails?.price} Rs`,
                                 "Shipping Address": `${merchentOrder?.deleveryAddress?.addressLine || null}, ${merchentOrder?.deleveryAddress?.city || null}, ${merchentOrder?.deleveryAddress?.state || null}, ${merchentOrder?.deleveryAddress?.pincode || null}`,
                                 "Order Status": `${merchentOrder?.orderStatus}`,
