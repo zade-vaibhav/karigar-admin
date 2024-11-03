@@ -109,7 +109,7 @@ export function MerchentPaymentOrderDetail() {
                                 "Brand Name": `${merchentOrder?.productId?.brandName}`,
                                 "Booked Quantity": `${merchentOrder?.bookingQuantity}`,
                                 "Price": `${merchentOrder?.productId?.price}`,
-                                "Total Price": `${merchentOrder?.bookingQuantity * merchentOrder?.productId?.price} Rs`,
+                                "Total Price": `${merchentOrder?.bookingQuantity * merchentOrder?.payment?.paymentDetails?.price} Rs`,
                                 "Shipping Address": `${merchentOrder?.deleveryAddress?.addressLine || null}, ${merchentOrder?.deleveryAddress?.city || null}, ${merchentOrder?.deleveryAddress?.state || null}, ${merchentOrder?.deleveryAddress?.pincode || null}`,
                                 "Order Status": `${merchentOrder?.orderStatus}`,
                             }}
@@ -131,7 +131,7 @@ export function MerchentPaymentOrderDetail() {
                             details={{
                                 "Payment ID": `${merchentOrder?.payment?.paymentId}`,
                                 "Payment By": `${merchentOrder?.userId?.name}`,
-                                "Payment Price": `${merchentOrder?.bookingQuantity * merchentOrder?.productId?.price} Rs`,
+                                "Payment Price": `${merchentOrder?.bookingQuantity * merchentOrder?.payment?.paymentDetails?.price} Rs`,
                                 "Payment Type": `${merchentOrder?.payment?.paymentType}`,
                                 "Payment Mode": `${merchentOrder?.payment?.paymentMode}`,
                                 "Payment Status": `${merchentOrder?.payment?.paymentStatus}`,
