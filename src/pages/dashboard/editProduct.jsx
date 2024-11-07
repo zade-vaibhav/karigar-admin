@@ -13,8 +13,6 @@ export function EditProduct() {
     discountdPrice: "",
     barCode: "",
     quantity: "",
-    gstNumber: "",
-    gstRate: "",
     model: "",
     variant: "",
   });
@@ -30,7 +28,7 @@ export function EditProduct() {
         const result = await response.json();
         if (result.success) {
           const myProduct = result.products.filter((ele) => {
-            return ele.merchentId == id;
+            return ele.merchentId == id && ele._id == productId;
           })[0];
 
           // Remove unwanted fields from product data
@@ -64,7 +62,7 @@ export function EditProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const requestOptions = {
-      method: "PUT",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(productData),
     };
@@ -78,7 +76,7 @@ export function EditProduct() {
 
       if (result.success) {
         alert("Product updated successfully");
-        navigate(`/dashboard/Merchents/product/${id}`);
+        navigate(`/dashboard/Merchents/product/${id}/${productId}`);
       } else {
         alert("Failed to update product");
       }

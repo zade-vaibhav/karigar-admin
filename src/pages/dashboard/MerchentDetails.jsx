@@ -88,7 +88,7 @@ export function MerchentDetail() {
                     <div className="mb-10 flex items-center justify-between flex-wrap gap-6">
                         <div className="flex items-center gap-6">
                             <Avatar
-                                src="/img/bruce-mars.jpeg"
+                                src={merchents?.profileImage || "/img/bruce-mars.jpeg"}
                                 alt="bruce-mars"
                                 size="xl"
                                 variant="rounded"
@@ -280,7 +280,7 @@ export function MerchentDetail() {
                                                 </td>
                                                 {/* View Link */}
                                                 <td className={className}>
-                                                    <Link to={`/dashboard/Merchents/product/${id}`} className="text-xs font-semibold text-blue-gray-600">
+                                                    <Link to={`/dashboard/Merchents/product/${id}/${_id}`} className="text-xs font-semibold text-blue-gray-600">
                                                         View
                                                     </Link>
                                                 </td>

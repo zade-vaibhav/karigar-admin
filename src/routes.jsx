@@ -15,6 +15,7 @@ import Users from "./pages/dashboard/Users";
 import AddAdmin from "./pages/AddAdmin";
 import Coupons from "./pages/dashboard/Coupons";
 import ServiceCharges from "./pages/dashboard/ServiceCharges";
+import BannerManager from "./components/BannerManager/BannerManager";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -77,6 +78,12 @@ export const routes = [
         name: "Coupons",
         path: "/Coupons",
         element: <Coupons />,
+      },
+      {
+        icon: <InformationCircleIcon {...icon} />,
+        name: "Banner",
+        path: "/Banners",
+        element:<BannerManager/>,
       },
       {
         icon: <InformationCircleIcon {...icon} />,

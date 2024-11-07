@@ -17,7 +17,7 @@ const sampleImages = [
 ];
 
 export function MerchentProductDetail() {
-  const { id, orderId } = useParams();
+  const { id, productId } = useParams();
   const [products, setProducts] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigation = useNavigate();
@@ -35,8 +35,9 @@ export function MerchentProductDetail() {
       console.log(result, "  product");
       if (result.success == true) {
         const myProduct = result.products.filter((ele) => {
-          return ele.merchentId == id;
+          return ele.merchentId == id && ele._id == productId;
         });
+        console.log(myProduct,"   my product")
         setProducts(myProduct[0]);
       }
     } catch (error) {
@@ -53,21 +54,21 @@ export function MerchentProductDetail() {
   // Handle next image
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === sampleImages.length - 1 ? 0 : prevIndex + 1
+      prevIndex === products?.images.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   // Handle previous image
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? sampleImages.length - 1 : prevIndex - 1
+      prevIndex === 0 ? products?.images.length - 1 : prevIndex - 1
     );
   };
 
   const handleEditClick = () => {
-    navigation(`/dashboard/Merchants/Editproduct/${id}/${products._id}`);
+    navigation(`/dashboard/Merchants/Editproduct/${id}/${products?._id}`);
   };
-
+  console.log(currentImageIndex)
   return (
     <>
       <CardHeader variant="gradient" color="gray" className="mt-8 p-6">
@@ -76,14 +77,15 @@ export function MerchentProductDetail() {
         </Typography>
       </CardHeader>
       {/* Carousel Section */}
-      <div className="relative mt-8 h-72 w-full overflow-hidden rounded-xl">
+      <div onClick={()=>console.log(products.images[currentImageIndex])} className="relative mt-8 h-72 w-full overflow-hidden rounded-xl">
         {/* Images */}
         {products?.images && products.images.length > 0 && (
           <div
+            
             className="h-full w-full bg-cover bg-center"
             style={{
               backgroundImage: `url(${
-                products.images[currentImageIndex] || ""
+                products?.images[currentImageIndex] || ""
               })`,
             }}
           ></div>
@@ -146,7 +148,7 @@ export function MerchentProductDetail() {
             />
           </div>
           <Link
-            to={`/dashboard/Merchents/Editproduct/${id}/${products._id}`}
+            to={`/dashboard/Merchents/Editproduct/${id}/${products?._id}`}
             className="bg-blue-500 text-white py-2 px-4 rounded"
           >
             Edit Product

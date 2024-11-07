@@ -71,7 +71,7 @@ export function Dashboard() {
           />
           <Route
             exact
-            path={"/Merchents/product/:id"}
+            path={"/Merchents/product/:id/:productId"}
             element={<MerchentProductDetail />}
           />
           <Route exact path={"/Architech/:id"} element={<ArchitechDetail />} />

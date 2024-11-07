@@ -26,6 +26,7 @@ export function MerchentPayments() {
             const response = await fetch("https://karigar-server-new.onrender.com/api/v1/merchent/getAllMerchents",requestOptions
             );
             const result = await response.json();
+            console.log(result)
             if (result.success === true) {
                 // Combine all orders from the labors into a single array
                 const allOrders = result.merchants.reduce((acc, merchent) => {
@@ -206,12 +207,12 @@ async function handelSettel(merchentId, orderId) {
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {productId.productName}
+                                                    {productId?.productName}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {payment.paymentDetails.price* bookingQuantity} Rs
+                                                    {payment?.paymentDetails?.price* bookingQuantity} Rs
                                                 </Typography>
                                             </td>
                                             <td className={className}>
