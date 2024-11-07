@@ -23,7 +23,7 @@ const AddBanner = ({ onClose }) => {
     formData.append("applicableFor", JSON.stringify(applicableFor));
 
     try {
-      const response = await fetch("http://localhost:4040/api/v1/admin/add-banners", {
+      const response = await fetch("https://karigar-server-new.onrender.com/api/v1/admin/add-banners", {
         method: "POST",
         body: formData,
       });

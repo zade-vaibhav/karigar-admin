@@ -9,7 +9,7 @@ const BannerManager = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await fetch("http://localhost:4040/api/v1/admin/get-banners");
+        const response = await fetch("https://karigar-server-new.onrender.com/api/v1/admin/get-banners");
         const result = await response.json();
         
         if (result.success) {
