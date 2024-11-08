@@ -15,6 +15,8 @@ const AddCouponModal = ({ onClose }) => {
       applicableFor,
       expirationDate,
     };
+    console.log(newCoupon);
+
     try {
       const response = await fetch(
         "https://karigar-server-new.onrender.com/api/v1/admin/createOrUpdateCoupon",
