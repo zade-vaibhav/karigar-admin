@@ -1,27 +1,38 @@
+import { Alert } from "@material-tailwind/react";
 import React, { useState } from "react";
 
 const AddServiceChargeModal = ({ onClose }) => {
-  const [serviceType, setServiceType] = useState("");
-  const [chargeType, setChargeType] = useState("percentage");
+  const [serviceType, setServiceType] = useState("labor");
+  const [chargeType, setChargeType] = useState("flat");
   const [chargeAmount, setChargeAmount] = useState("");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     const newServiceCharge = { serviceType, chargeType, chargeAmount };
+    console.log(newServiceCharge);
 
     try {
-      await fetch(
-        "https://karigar-server-new.onrender.com/api/v1/admin/addServiceCharge",
+      const rsponse = await fetch(
+        "https://karigar-server-new.onrender.com/api/v1/admin/createOrUpdateService-charge",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(newServiceCharge),
+          body: JSON.stringify({ serviceType, chargeType, chargeAmount }),
         }
       );
-      onClose(); // Close modal after submission
+      const result = await rsponse.json();
+      console.log(result);
+
+      if (result.success) {
+        alert(result.message);
+        onClose();
+      }
+      alert(result.message);
+      onClose();
+      // Close modal after submission
     } catch (error) {
       console.error("Error adding service charge:", error);
     }
@@ -36,13 +47,22 @@ const AddServiceChargeModal = ({ onClose }) => {
         <form onSubmit={handleFormSubmit}>
           {/* Service Type */}
           <label className="block text-gray-700">Service Type</label>
-          <input
+          {/* <input
             type="text"
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
             className="w-full p-2 mb-4 border rounded-md"
             required
-          />
+          /> */}
+          <select
+            value={serviceType}
+            onChange={(e) => setServiceType(e.target.value)}
+            className="w-full p-2 mb-4 border rounded-md"
+          >
+            <option value="labor">Labor</option>
+            <option value="architect">Architect</option>
+            <option value="materialSupplier">Material Supplier</option>
+          </select>
 
           {/* Charge Type */}
           <label className="block text-gray-700">Charge Type</label>
@@ -51,7 +71,7 @@ const AddServiceChargeModal = ({ onClose }) => {
             onChange={(e) => setChargeType(e.target.value)}
             className="w-full p-2 mb-4 border rounded-md"
           >
-            <option value="percentage">Percentage</option>
+            {/* <option value="percentage">Percentage</option> */}
             <option value="flat">Flat</option>
           </select>
 
