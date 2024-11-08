@@ -50,14 +50,14 @@ export function KarigarorderDetail() {
   // Handle next image
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === sampleImages.length - 1 ? 0 : prevIndex + 1
+      prevIndex === workerOrder?.workDetails?.images?.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   // Handle previous image
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? sampleImages.length - 1 : prevIndex - 1
+      prevIndex === 0 ? workerOrder?.workDetails?.images?.length - 1 : prevIndex - 1
     );
   };
 

@@ -52,14 +52,14 @@ export function UserKarigarOrder() {
   // Handle next image
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === sampleImages.length - 1 ? 0 : prevIndex + 1
+      prevIndex === userOrder?.workDetails?.images?.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   // Handle previous image
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? sampleImages.length - 1 : prevIndex - 1
+      prevIndex === 0 ? userOrder?.workDetails?.images?.length - 1 : prevIndex - 1
     );
   };
 
@@ -120,13 +120,13 @@ export function UserKarigarOrder() {
             <ProfileInfoCard
               title="Karigar Detail"
               details={{
-                Name: `${userOrder?.labourId?.name}`,
-                Phone: `${userOrder?.labourId?.mobile_number.slice(2, 12)}`,
-                Designation: `${userOrder?.labourId?.designation}`,
-                "Account No": `${userOrder?.labourId?.bankDetails.accountNumber}`,
-                "IFSC Code": `${userOrder?.labourId?.bankDetails.ifscCode}`,
-                "Bank Name": `${userOrder?.labourId?.bankDetails.bankName}`,
-                "A/c Holder Name": `${userOrder?.labourId?.bankDetails.accountHolderName}`,
+                Name: `${userOrder?.labourId?.name || "Not found"}`,
+                Phone: `${userOrder?.labourId?.mobile_number.slice(2, 12) || "Not found"}`,
+                Designation: `${userOrder?.labourId?.designation || "Not found"}`,
+                "Account No": `${userOrder?.labourId?.bankDetails.accountNumber || "Not found"}`,
+                "IFSC Code": `${userOrder?.labourId?.bankDetails.ifscCode || "Not found"}`,
+                "Bank Name": `${userOrder?.labourId?.bankDetails.bankName || "Not found"}`,
+                "A/c Holder Name": `${userOrder?.labourId?.bankDetails.accountHolderName || "Not found"}`,
               }}
             />
 

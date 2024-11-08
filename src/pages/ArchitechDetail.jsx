@@ -66,7 +66,7 @@ export function ArchitechDetail() {
                     <div className="mb-10 flex items-center justify-between flex-wrap gap-6">
                         <div className="flex items-center gap-6">
                             <Avatar
-                                src="/img/bruce-mars.jpeg"
+                                src={Architech?.profileImage || "/img/bruce-mars.jpeg"}
                                 alt="bruce-mars"
                                 size="xl"
                                 variant="rounded"
@@ -74,13 +74,13 @@ export function ArchitechDetail() {
                             />
                             <div>
                                 <Typography variant="h5" color="blue-gray" className="mb-1">
-                                    {Architech.name}
+                                    {Architech?.name}
                                 </Typography>
                                 <Typography
                                     variant="small"
                                     className="font-normal text-blue-gray-600"
                                 >
-                                    {Architech._id}
+                                    {Architech?._id}
                                 </Typography>
                             </div>
                         </div>
@@ -160,7 +160,7 @@ export function ArchitechDetail() {
                                 "Degree": `${Architech?.education?.degree}`,
                                 "University": `${Architech?.education?.university}`,
                                 "Year": `${Architech?.education?.year}`,
-                                "Exprience": `${Architech?.experience}`,
+                                "Exprience": `${Architech?.experience} year`,
                                 // social: (
                                 //     <div className="flex items-center gap-4">
                                 //         <i className="fa-brands fa-facebook text-blue-700" />

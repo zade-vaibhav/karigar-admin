@@ -105,7 +105,7 @@ export function KarigarDetail() {
                     <div className="mb-10 flex items-center justify-between flex-wrap gap-6">
                         <div className="flex items-center gap-6">
                             <Avatar
-                                src="/img/bruce-mars.jpeg"
+                                src={workers?.profileImage || "/img/bruce-mars.jpeg"}
                                 alt="bruce-mars"
                                 size="xl"
                                 variant="rounded"
@@ -113,13 +113,13 @@ export function KarigarDetail() {
                             />
                             <div>
                                 <Typography variant="h5" color="blue-gray" className="mb-1">
-                                    {workers.name}
+                                    {workers?.name}
                                 </Typography>
                                 <Typography
                                     variant="small"
                                     className="font-normal text-blue-gray-600"
                                 >
-                                    {workers._id}
+                                    {workers?._id}
                                 </Typography>
                             </div>
                         </div>

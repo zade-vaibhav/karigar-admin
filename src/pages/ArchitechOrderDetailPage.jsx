@@ -51,14 +51,14 @@ export function ArchitechorderDetail() {
   // Handle next image
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === sampleImages.length - 1 ? 0 : prevIndex + 1
+      prevIndex === Architechorder?.images?.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   // Handle previous image
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? sampleImages.length - 1 : prevIndex - 1
+      prevIndex === 0 ? Architechorder?.images?.length - 1 : prevIndex - 1
     );
   };
    console.log(Architechorder)
