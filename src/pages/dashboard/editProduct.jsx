@@ -150,9 +150,11 @@ export function EditProduct() {
     quantity: "",
     model: "",
     variant: "",
+    gstRate: "",
     images: [], // Include images field
   });
   const [newImages, setNewImages] = useState([]); // New state for new image uploads
+  console.log("00", productData);
 
   useEffect(() => {
     async function fetchProductData() {
@@ -209,6 +211,7 @@ export function EditProduct() {
     newImages.forEach((image) => {
       formData.append("images", image);
     });
+    console.log("0", formData);
 
     try {
       const response = await fetch(
@@ -231,7 +234,8 @@ export function EditProduct() {
     }
   };
 
-  const excludedFields = ["rating", "review"];
+  // const excludedFields = ["rating", "review"];
+  const excludedFields = ["images", "rating", "review", "gstRate", "gstNumber"];
 
   return (
     <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
